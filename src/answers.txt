@@ -1,0 +1,10 @@
+a)
+Mithilfe der RawDataFactory ist es möglich eine Abgrenzung der Programmfunktionen zu gewähren. Der Zugriff zum erstellen von Objekten ist nur noch für RawDataFactory möglich und DataFactory ist die einzige Klasse die noch RawDataFactory nutzen darf.
+
+
+b)
+Die RawDataFactory Instanz wird nur beim ersten Aufruf übergeben. Bei jedem nachträglichen Aufruf wird null übergeben.
+
+
+c)
+Die Klasse system.DataFactory ist die einzige Klasse die das RawDataFactoryIntf Interface implementiert. Mit Hilfe dessen wird erreicht das nur diese Klasse RawDataFactory nutzen kann.
