@@ -32,14 +32,24 @@ final class OrderProcessor implements Components.OrderProcessor {
 
 	@Override
 	public long vat(long grossValue) {
-		// TODO Auto-generated method stub
-		return 0;
+		return vat(grossValue, 1);
 	}
 
 	@Override
 	public long vat(long grossValue, int rateIndex) {
-		// TODO Auto-generated method stub
-		return 0;
+		double mwst = 1.19;
+		
+		switch(rateIndex) {
+		case 1:
+			mwst = 1.19;
+			break;
+		case 2:
+			mwst = 1.07;
+			break;
+		}
+		
+		long vat = grossValue - (long) (grossValue / mwst);
+		return vat;
 	}
 
 }
