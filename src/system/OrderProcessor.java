@@ -6,27 +6,25 @@ import datamodel.Order;
 import datamodel.OrderItem;
 
 final class OrderProcessor implements Components.OrderProcessor {
+	private final InventoryManager inventoryManager;
 
 	OrderProcessor(InventoryManager inventoryManager) {
-		// TODO Auto-generated constructor stub
+		this.inventoryManager = inventoryManager;
 	}
 
 	@Override
 	public boolean accept(Order order) {
-		// TODO Auto-generated method stub
 		return false;
 	}
 
 	@Override
 	public boolean accept(Order order, Consumer<Order> acceptCode, Consumer<Order> rejectCode,
 			Consumer<OrderItem> rejectedOrderItemCode) {
-		// TODO Auto-generated method stub
 		return false;
 	}
 
 	@Override
 	public long orderValue(Order order) {
-		// TODO Auto-generated method stub
 		return 0;
 	}
 
@@ -37,7 +35,7 @@ final class OrderProcessor implements Components.OrderProcessor {
 
 	@Override
 	public long vat(long grossValue, int rateIndex) {
-		double mwst = 1.19;
+		double mwst = 0;
 		
 		switch(rateIndex) {
 		case 1:

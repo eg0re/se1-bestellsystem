@@ -7,66 +7,40 @@ public class Customer {
 	private String contact;
 
 	protected Customer(String id, String name, String contact) {
-		if( id == null) {
-			this.id = null;
-		} else {
-			this.id = id;
-		}
-		
-		if ( name == null) {
-			this.lastName = "";
-		} else {
-			this.lastName = name;
-		}
-
-		if ( contact == null) {
-			this.contact = "";
-		} else {
-			this.contact = contact;
-		}
-
-		
-		this.firstName = "";
-		
+        this.id = id;
+        this.setLastName(name);
+        this.setFirstName("");
+        this.setContact(contact);
 	}
 
 	public String getId() {
-		return id;
+		return this.id;
 	}
 
 	public String getFirstName() {
-		return firstName;
+		return this.firstName;
 	}
 
 	public void setFirstName(String firstname) {
-		if( firstname == null) {
-			this.firstName = "";
-		} else {
-			this.firstName = firstname;
-		}
+		this.firstName = firstname;
+		if( firstname == null) this.firstName = "";
 	}
 
 	public String getLastName() {
-		return lastName;
+		return this.lastName;
 	}
 
 	public void setLastName(String lastname) {
-		if( lastname == null) {
-			this.lastName = "";
-		} else {
-			this.lastName = lastname;
-		}
+		this.lastName = lastname;
+		if( lastname == null) this.lastName = "";
 	}
 	
 	public String getContact() {
-		return contact;
+		return this.contact;
 	}
 
 	public void setContact(String contact) {
-		if( contact == null) {
-			this.contact = "";
-		} else {
-			this.contact = contact;
-		}
+		this.contact = contact;
+		if( contact == null) this.contact = "";
 	}
 }

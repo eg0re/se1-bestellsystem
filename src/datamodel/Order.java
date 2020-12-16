@@ -5,14 +5,20 @@ import java.util.Date;
 import java.util.List;
 
 public class Order {
-	final long id;
-	final Date date;
-	final Customer customer;
-	final List<OrderItem> items;
+	private long id;
+	private Date date;
+	private Customer customer;
+	private List<OrderItem> items;
 
 	protected Order(long id, Date date, Customer customer) {
 		this.id = id;
-		this.date = date;
+
+		if (date == null) {
+			this.date = new Date();
+		} else {
+			this.date = date;
+		}
+
 		this.customer = customer;
 		this.items = new ArrayList<OrderItem>();
 	}
@@ -37,19 +43,22 @@ public class Order {
 		return items.size();
 	}
 
-	public Order addItem(OrderItem item) {		
-		items.add(item);
+	public Order addItem(OrderItem item) {
+		if (items.contains(item) || item == null) {
+			return this;
+		}
+		this.items.add(item);
 		return this;
 	}
 
 	public Order removeItem(OrderItem item) {
-		items.remove(item);
+		this.items.remove(item);
 		return this;
 
 	}
 
 	public Order clearItems() {
-		items.clear();
+		this.items.clear();
 		return this;
 	}
 }

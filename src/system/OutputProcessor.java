@@ -256,42 +256,51 @@ final class OutputProcessor implements Components.OutputProcessor {
 		return padded;
 	}
 
-	/**
-	* Split single-String name to first- and last name and set to the customer
-	* object, e.g. single-String "Eric Meyer" is split into "Eric" and "Meyer".
-	*
-	* @param customer object for which first- and lastName are set
-	* @param name single���String name that is split into first��� and last name
-	* @return returns single���String name extracted from customer object
-	*/
+    /**
+     * Split single-String name to first- and last name and set to the customer object,
+     * e.g. single-String "Eric Meyer" is split into "Eric" and "Meyer".
+     *
+     * @param customer object for which first- and lastName are set
+     * @param name     single-String name that is split into first- and last name
+     * @return returns single-String name extracted from customer object
+     */
 	@Override
 	public String splitName( Customer customer, String name ) {
-        String[] words;
-        if (name.contains(" ")) {
-            words = name.split(" ");
-            customer.setFirstName(words[1].strip());
-            customer.setLastName(words[0]);
+        String lastName = "";
+        String firstName = "";
+		
+        boolean comma = name.contains(",");
+        String[] splittednames = name.split("[, ]+");
+
+        if(comma) {
+            lastName = splittednames[0];
+
+            for(int i = 1; i < splittednames.length; i++) {
+                firstName += splittednames[i] + " ";
+            }
         } else {
-            String regexLast = "(?<=\\W)((?<![A-Z])[a-z]+\\W+)*[A-Z][a-z]*(-[A-Z][a-z]*)*$";
-            Pattern pattern = Pattern.compile(regexLast);
-            Matcher matcher = pattern.matcher(name);
-            matcher.find();
-            String last = matcher.group();
-            customer.setLastName(last);
-            String first = name.substring(0, name.length() - last.length());
-            customer.setFirstName(first.strip());
+            lastName = splittednames[splittednames.length - 1];
+
+            for(int i = 0; i < splittednames.length - 1; i++) {
+                firstName += splittednames[i] + " ";
+            }
         }
-        
-        return customer.getLastName()  + ", " + customer.getFirstName();
+
+        firstName = firstName.trim();
+
+        customer.setFirstName(firstName);
+        customer.setLastName(lastName);
+
+        return singleName(customer);
 	}
 
-	/**
-	* Returns single���String name obtained from first��� and lastName attributes of
-	* Customer object, e.g. "Eric", "Meyer" returns single���String "Meyer, Eric".
-	*
-	* @param customer object referred to
-	* @return sanitized name derived from first��� and lastName attributes
-	*/
+    /**
+     * Returns single-String name obtained from first- and lastName attributes of
+     * Customer object, e.g. "Eric", "Meyer" returns single-String "Meyer, Eric".
+     *
+     * @param customer object referred to
+     * @return name derived from first- and lastName attributes
+     */
 	@Override
 	public String singleName( Customer customer ) {
 		return customer.getLastName() + ", " + customer.getFirstName();
